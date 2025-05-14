@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+      - chmod 755 opa
+      - mv opa /usr/local/bin/opa
+      
+  pre_build:
+    commands:
+      - echo "Running OPA tests"
+      - opa test s3_policy.rego
+
+  build:
+    commands:
+      - echo "Validating policy"
+      - opa check s3_policy.rego
+      
+  post_build:
+    commands:
+      - aws s3 cp s3_policy.rego s3://${POLICY_BUCKET}/policies/s3_policy.rego
+
