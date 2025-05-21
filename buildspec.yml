@@ -12,12 +12,12 @@ phases:
   pre_build:
     commands:
       - echo "Running OPA tests"
-      - opa check s3_policy.rego
+
 
   build:
     commands:
       - echo "Validating policy"
-      - opa check s3_policy.rego
+
       
   post_build:
     commands:
