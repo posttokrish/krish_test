@@ -8,7 +8,7 @@ phases:
       - curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
       - chmod 755 opa
       - mv opa /usr/local/bin/opa
-      - ls -l; pwd; which opa; 
+      - ls -l; pwd; which opa; opa version
       
   pre_build:
     commands:
@@ -19,6 +19,7 @@ phases:
   build:
     commands:
       - echo "Validating policy"
+      - opa test s3_policy.rego s3_policy_test.rego
 
       
   post_build:
