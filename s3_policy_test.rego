@@ -1,7 +1,7 @@
 package aws.s3
 
 test_versioning_required {
-    deny with input as {
+    deny[msg] if {
         "resource": {
             "type": "aws_s3_bucket",
             "settings": {
@@ -13,7 +13,7 @@ test_versioning_required {
 }
 
 test_encryption_required {
-    deny with input as {
+    deny[msg] if {
         "resource": {
             "type": "aws_s3_bucket",
             "settings": {
